@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
 import { auth } from '@/plugins/firebase'
 import {computed, ref} from "vue";
+import {signInAnonymously} from "firebase/auth";
 
 export const useUserStore = defineStore('users', () => {
 
@@ -19,6 +20,8 @@ export const useUserStore = defineStore('users', () => {
       if (user) {
         console.log(user.uid)
         setCurrentUser(user)
+      } else {
+        signInAnonymously(auth)
       }
     })
   }
