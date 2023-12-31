@@ -72,8 +72,10 @@
 
 <script setup>
 import { useObservationStore } from "@/store/observation";
+// import {storeToRefs} from "pinia";
 const store = useObservationStore()
-const { observation } = store
-console.log(observation)
+// const { observationList } = storeToRefs(store)
+//
+// console.log(observationList.value)
 //
 </script>

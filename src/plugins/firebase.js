@@ -2,25 +2,28 @@
 
 import {initializeApp} from "firebase/app";
 import { getAuth, browserLocalPersistence, setPersistence } from "firebase/auth";
-
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBXEG9qKL-EgR7fjaBtCzfusKrkr_1w9os",
-  authDomain: "auth-6220f.firebaseapp.com",
-  projectId: "auth-6220f",
-  storageBucket: "auth-6220f.appspot.com",
-  messagingSenderId: "1089039182940",
-  appId: "1:1089039182940:web:6feb239f05876753910a99"
-
-};
+  apiKey: "AIzaSyD_87nu_409WL2Cz82OQg1CoGzDeuEfeg4",
+  authDomain: "bird-watcher-85fb3.firebaseapp.com",
+  projectId: "bird-watcher-85fb3",
+  storageBucket: "bird-watcher-85fb3.appspot.com",
+  messagingSenderId: "985807872428",
+  appId: "1:985807872428:web:6587e56a6b6c21e252da09",
+  measurementId: "G-B40L12VDKL",
+}
 
 // Initialize Firebase
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app)
+const db = getFirestore(app);
+
 setPersistence(auth, browserLocalPersistence)
 export {
-  auth
+  auth,
+  db
 }
 
 

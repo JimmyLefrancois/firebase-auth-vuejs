@@ -1,20 +1,24 @@
 import {defineStore, storeToRefs} from "pinia";
 import { useUserStore } from "@/store/user";
-import {computed} from "vue";
+import { ref} from "vue";
+import { db } from '@/plugins/firebase'
+import { collection, where, getDocs,query } from "firebase/firestore";
 
-const store = useUserStore()
+export const useObservationStore = defineStore('observations', async () => {
 
-const { loggedUser } = storeToRefs(store)
-console.log(loggedUser.value)
+  const store = useUserStore()
+  const { loggedUser } = storeToRefs(store)
+  console.log(loggedUser.value)
 
-const observation = computed(() => {
+  const observationsList = ref([])
+
+  const q = query(collection(db, 'observations'), where("user", "==", loggedUser.value.uid));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    observationsList.value.push(doc.data())
+  });
+
   return {
-    user: loggedUser.value
+    observationsList
   }
-})
-
-export const useObservationStore = defineStore('observations', () => {
-
-
-  return {observation}
 })
