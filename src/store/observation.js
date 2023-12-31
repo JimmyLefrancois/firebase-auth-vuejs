@@ -8,18 +8,23 @@ export const useObservationStore = defineStore('observations', async () => {
 
   const store = useUserStore()
   const { loggedUser } = storeToRefs(store)
-  console.log(loggedUser.value)
 
-  const observationsList = ref([])
+  const observation = ref({})
 
-    console.log('yo')
-    const q = query(collection(db, 'observations'), where("user", "==", loggedUser.value.uid));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      observationsList.value.push(doc.data())
-    });
+  // const queryItem = computed(() => {
+  //   return query(collection(db, 'observations'), where("user", "==", loggedUser.value.uid));
+  // })
+  //
+  // const observationsListItem = computed(async () => {
+  //   const querySnapshot = await getDocs(queryItem.value);
+  //   const truc = []
+  //   querySnapshot.forEach((doc) => {
+  //     truc.push(doc.data())
+  //   });
+  //   return truc
+  // })
 
   return {
-    observationsList
+    observation
   }
 })
